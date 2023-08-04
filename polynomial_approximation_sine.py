@@ -36,7 +36,7 @@ expr = sympify(string_polynomial)  # finished polynomial expression
 
 # this expression, when evaluated for specific values for a_0, ..., a_5, will return a real number which is what this
 # program is trying to minimize.
-#testing
+#testing aaaa
 summary_function = integrate((expr - sin(x))**2, (x, -3, 3))
 
 # point = random shit
