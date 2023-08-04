@@ -5,11 +5,24 @@ This program uses gradient descent to find an n-degree polynomial which approxim
 
 from sympy import *
 
+
+def calculate_gradient(expr, vars, point):
+    """returns the gradient (vector size len(vars)) of the given expression at the given point. point is
+    a list. of length len(vars) representing a point in len(vars) dimensional space."""
+    grad = []
+    for var in range(len(vars)+1):
+        grad.append(diff(expr, var).subs(point))
+    return grad
+
+
 def grad_descent_algorithm(expr, vars, point, learning_rate, runs):
+    runs += 1
     if runs > 100:
         return point
-    gradient = diff(expr, (* for * in vars.values()))
-    point = point + learning_rate*diff
+    gradient_at_point = calculate_gradient(expr, vars, point)
+    next_point = point + learning_rate*gradient_at_point #
+    grad_descent_algorithm(expr, vars, next_point, learning_rate, runs)
+
 
 string_polynomial = ""  # string object
 
@@ -26,7 +39,9 @@ expr = sympify(string_polynomial)  # finished polynomial expression
 
 summary_function = integrate((expr - sin(x))**2, (x, -3, 3))
 
+# point = random shit
 
+grad_descent_algorithm(summary_function, vars,)
 
 
 # vars is a dictionary containing variable names a_0, a_1, ...., a_5 as keys for values 0, 1, ..., 5
